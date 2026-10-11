@@ -1,0 +1,31 @@
+# 统一换行符，避免跨平台 checkout 后脚本无法执行
+#
+# 背景：Windows 上 Git 默认开启 core.autocrlf，会把文本文件的 LF 转成 CRLF。
+# 这会让 shell 脚本首行变成 "#!/usr/bin/env bash\r"，Linux/macOS 下报
+# bad interpreter 错误。所以必须按文件类型分别锁定。
+
+* text=auto
+
+# shell 脚本必须保持 LF
+*.sh   text eol=lf
+
+# PowerShell 脚本用 CRLF（Windows PowerShell 5.1 对无 BOM 的 LF 文件会按 ANSI 解码）
+*.ps1  text eol=crlf
+
+# 纯文本资料保持 LF
+*.md   text eol=lf
+*.json text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+
+# 二进制文件不做换行转换
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.pdf  binary
+*.ttf  binary
+*.woff binary
+*.woff2 binary
+*.zip  binary
+*.gz   binary

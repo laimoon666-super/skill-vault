@@ -1,0 +1,22 @@
+{
+  "_readme": "机器可读的 skill 清单。AI Agent 请读 skills 数组；每新增一个 skill 必须同步在此登记。",
+  "_entrySchema": {
+    "name": "skill 名称，与 skills/ 下的目录名一致",
+    "path": "仓库内相对路径",
+    "description": "干什么用的、什么时候该用（写给 AI 看的触发条件）",
+    "tags": ["分类标签"],
+    "hasScripts": "是否含可执行脚本",
+    "requires": ["依赖的外部命令或运行时，如 python / ffmpeg / bun"],
+    "env": ["需要用户配置的环境变量名，如 SEEDREAM_API_KEY"]
+  },
+  "version": 1,
+  "owner": "laimoon666-super",
+  "repo": "https://github.com/laimoon666-super/skill-vault",
+  "updatedAt": "2026-10-11",
+  "defaultInstallTargets": {
+    "claude": "~/.claude/skills",
+    "codex": "~/.codex/skills",
+    "dsh": "~/.dsh/skills"
+  },
+  "skills": []
+}

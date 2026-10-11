@@ -1,0 +1,46 @@
+# ---- 操作系统垃圾 ----
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ---- 编辑器 / IDE ----
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ---- 依赖与构建产物（应可再生成，不入库）----
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+dist/
+build/
+*.egg-info/
+.next/
+.cache/
+
+# ---- 密钥与本地配置：绝不入库 ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+secrets.json
+*.local.json
+
+# ---- 临时文件 ----
+*.log
+*.tmp
+*.bak
+.dryrun/
