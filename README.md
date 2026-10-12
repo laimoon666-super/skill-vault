@@ -107,10 +107,18 @@ git pull
 
 ## 🔌 插件清单
 
-第三方插件（如 Figma、GitHub 官方插件）**不备份文件**，只记录名称与来源，需要时照着重装。
-详见 [`plugins/installed.md`](./plugins/installed.md)。
+分两类处理，详见 [`plugins/installed.md`](./plugins/installed.md)：
 
-理由：这些插件从官方商店下载，随时可重装；单个插件动辄 1.5 MB 且带图标资源，入库没有价值。
+| 类别 | 处理方式 | 为什么 |
+|:---|:---|:---|
+| **自研插件** | ✅ **源码完整入库**（放 `plugins/<插件名>/`） | 商店里没有，丢了就真没了；且多以本地 `link:` 方式挂载，包管理器拉不回来 |
+| **第三方插件**（Figma、GitHub 官方插件等） | ❌ 只记录名称与来源 | 官方商店随时可重装；单个动辄 1.5 MB 且带图标资源，入库没有价值 |
+
+当前已入库的自研插件：
+
+| 插件名 | 平台 | 说明 |
+|:---|:---|:---|
+| [`token-stats`](./plugins/token-stats/README.md) | 🖥️ **仅 DSH** | DSH 桌面端 Token 用量统计面板。依赖 DSH 的 host 插件 API（`ctx.inject(...)`）与 bundle patch 机制，**Claude Code / Codex / Gemini CLI 等其他 Agent 用不了** |
 
 ---
 
@@ -123,7 +131,8 @@ skill-vault/
 ├── install.ps1            ← Windows 一键安装
 ├── install.sh             ← macOS / Linux 一键安装
 ├── plugins/
-│   └── installed.md       ← 插件清单（仅名称与来源，无二进制）
+│   ├── installed.md       ← 插件清单：自研插件完整入库 / 第三方只记录
+│   └── token-stats/       ← 自研插件源码（🖥️ 仅 DSH）
 └── skills/                ← skill 全文存放处
     └── <skill-name>/
         ├── SKILL.md       ← 必需：告诉 AI 这个 skill 是什么、何时用

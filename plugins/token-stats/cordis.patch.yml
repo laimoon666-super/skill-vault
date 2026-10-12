@@ -1,0 +1,8 @@
+# dsh-token-stats bundle layer: inserts this plugin row into the profile.
+# The single row mounts BOTH halves: the host side (session-query scan +
+# per-session usage cache + /api/token-stats/stats route) and the browser
+# side (a "token-stats" main panel with a sidebar entry, registered from
+# this package's client.js through the dsh.client declaration).
+- insert:
+    - id: token-stats
+      name: '@local/dsh-token-stats'

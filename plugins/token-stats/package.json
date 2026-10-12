@@ -1,0 +1,26 @@
+{
+  "name": "@local/dsh-token-stats",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Token usage statistics panel for the dsh desktop GUI: per-model token consumption folded from all session logs, with today / last-week / last-month quick ranges and custom time filtering.",
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "default": "./index.js"
+    },
+    "./client": {
+      "default": "./client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [],
+      "platform": "web"
+    }
+  }
+}
