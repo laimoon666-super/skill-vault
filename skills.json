@@ -50,6 +50,15 @@
       "requires": ["python"],
       "pythonDependencies": ["pandas", "openpyxl"],
       "env": []
+    },
+    {
+      "name": "suki-ad-watcher",
+      "path": "skills/suki-ad-watcher",
+      "description": "自动化执行 Suki App 的每日与限时激励视频广告观看任务（看广告领贝壳）。当用户要求跑 Suki 广告任务、领贝壳、或点名 suki_ad_runner 时使用。流程：ADB 连接自愈（Wi-Fi/USB 双模，适配荣耀 MagicOS 9.0）→ 单步截屏视觉验证 → 全屏透明遮罩清除 → 广告起播与倒计时等待/跳过 → 结算页与落地页关闭 → 以「任务全部变【明日再来】+ 贝壳正向增量」做双重证据链闭环核验。坐标表基于 1224×2700。",
+      "tags": ["安卓自动化", "ADB", "激励视频", "广告变现", "视觉验证"],
+      "hasScripts": true,
+      "requires": ["python", "adb"],
+      "env": []
     }
   ]
 }
