@@ -35,15 +35,27 @@ cd skill-vault
 ```
 
 脚本会把 `skills/` 下的每个文件夹复制到本机 AI Agent 的 skills 目录（默认 `~/.claude/skills`）。
-如果你的 Agent 用别的目录，加参数指定：
 
-```powershell
-.\install.ps1 -Target "$HOME\.codex\skills"
-```
+> ⚠️ **不同 Agent 读的目录不一样，装错地方 skill 不生效，而且不会有任何报错。**
+> 按你用的 Agent 选目标目录：
 
-**第 3 步：处理环境变量**
+| Agent | 目标目录 | 命令 |
+|:---|:---|:---|
+| **DSH** | `~/.agents/skills` | `.\install.ps1 -Target "$HOME\.agents\skills"` |
+| Claude Code | `~/.claude/skills`（脚本默认值） | `.\install.ps1` |
+| Codex | `~/.codex/skills` | `.\install.ps1 -Target "$HOME\.codex\skills"` |
+| Gemini CLI | `~/.gemini/config/skills` | `.\install.ps1 -Target "$HOME\.gemini\config\skills"` |
 
-安装完成后，检查 `skills.json` 里各条目的 `env` 字段。若不为空，提示用户配置对应的环境变量，不要尝试猜测或硬编码密钥。
+macOS / Linux 对应 `./install.sh -t <目录>`。机器可读的完整对照见 [`skills.json`](./skills.json) 的 `defaultInstallTargets`。
+
+**第 3 步：处理环境变量与 Python 依赖**
+
+安装完成后，检查 `skills.json` 里各条目的两个字段：
+
+- `env` 不为空 → 提示用户配置对应的环境变量，**不要尝试猜测或硬编码密钥**。
+- `pythonDependencies` 不为空 → 这些 skill 缺包会直接报错。让用户执行 `pip install <包名>`，或直接跑 `.\install.ps1 -InstallDeps` 自动装。
+
+安装脚本结尾会列出所需的依赖（`-DryRun` 预览时也会列）。
 
 > ⚠️ **本仓库是公开的，绝不包含任何 API Key / Token / 密码。**
 > 所有密钥一律通过环境变量注入。如果你在仓库里发现了疑似密钥，请立即告知用户。
@@ -57,8 +69,11 @@ cd skill-vault
 ```powershell
 git clone https://github.com/laimoon666-super/skill-vault.git
 cd skill-vault
-.\install.ps1
+.\install.ps1 -Target "$HOME\.agents\skills" -InstallDeps
 ```
+
+> `-Target` 按你用的 Agent 选（见上方对照表）。DSH 是 `~/.agents/skills`；**直接用默认的 `~/.claude/skills` 装，DSH 读不到，而且不报错。**
+> `-InstallDeps` 会顺带把各 skill 的 Python 依赖装上，可省略。
 
 ### 升级已有安装
 

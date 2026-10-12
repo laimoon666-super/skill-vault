@@ -14,10 +14,12 @@
   "owner": "laimoon666-super",
   "repo": "https://github.com/laimoon666-super/skill-vault",
   "updatedAt": "2026-10-12",
+  "_targetNote": "安装时用 install.ps1 -Target（或 install.sh -t）指定目录。注意：DSH 实际读取 ~/.agents/skills，而不是 ~/.dsh/skills。",
   "defaultInstallTargets": {
     "claude": "~/.claude/skills",
     "codex": "~/.codex/skills",
-    "dsh": "~/.dsh/skills"
+    "dsh": "~/.agents/skills",
+    "gemini": "~/.gemini/config/skills"
   },
   "skills": [
     {
