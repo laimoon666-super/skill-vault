@@ -38,6 +38,16 @@
       "requires": ["python"],
       "pythonDependencies": ["aiohttp", "websockets"],
       "env": []
+    },
+    {
+      "name": "cleaner-iaa-funnel-analysis",
+      "path": "skills/cleaner-iaa-funnel-analysis",
+      "description": "清理/优化类工具 App 的 IAA（广告变现）日常漏斗分析 SOP。当用户把原始数据文档（Excel / CSV / 截图 / 剪贴板表格）放进目录并要求清理 IAA 漏斗分析时使用。基准分母取 float_guide_show；输出四大链路标准漏斗（冷启权限 → 开屏广告与首清 → 主页到达与核心交互 → 常驻桌面与留存）；指标必须按「前置点击率 → 步骤授权成功率 → 全局最终授权率 → 后续流转率」的严格顺序呈现；有国家维度时默认剔除 Base UV ≤ 50 的长尾地区并聚焦非美地区。",
+      "tags": ["数据分析", "漏斗分析", "IAA", "广告变现", "清理工具"],
+      "hasScripts": true,
+      "requires": ["python"],
+      "pythonDependencies": ["pandas", "openpyxl"],
+      "env": []
     }
   ]
 }

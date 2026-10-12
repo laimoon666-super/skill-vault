@@ -86,6 +86,7 @@ git pull
 |:---|:---|:---:|:---:|
 | [`pdf-iap-funnel-analysis`](./skills/pdf-iap-funnel-analysis/SKILL.md) | PDF IAP 订阅产品的日常全链路漏斗分析 SOP：吃进 CSV / Excel / 截图数据，按「启动品宣 → 商业化订阅 → 系统权限 → 端内功能留存」四阶段建标准漏斗，输出归因结论与异常预警。默认给全量总汇总（高信息密度，可直接发飞书 / 钉钉 / 微信）；明确点名「用户分组 / AB 测试」时才下钻组间横向对比 | 否 | ✅ `scripts/funnel_analyzer.py` |
 | [`browser-delegation`](./skills/browser-delegation/SKILL.md) | 让 AI 直接操作你**正在用的那个真实 Chrome**：走扩展桥接，100% 复用现有登录态与多账号 Cookie，不用重新登录、不用重启浏览器。在专属紫色标签组里代操作，用完自动销毁标签页、撤销调试白条。换机器后需手动加载一次 `extension/` | 否 | ✅ `scripts/`（`client.py` SDK + `server.py` 桥接服务）<br>🧩 `extension/` Chrome 扩展源码 |
+| [`cleaner-iaa-funnel-analysis`](./skills/cleaner-iaa-funnel-analysis/SKILL.md) | 清理 / 优化类工具 App 的 **IAA 广告变现**日常漏斗分析 SOP：把原始数据文档（Excel / CSV / 截图 / 剪贴板表格）丢进目录就能跑。四大链路标准漏斗（冷启权限 → 开屏广告与首清 → 主页到达与核心交互 → 常驻桌面留存），指标强制按「点击率 → 步骤授权成功率 → 全局授权率 → 后续流转率」顺序呈现；含地区下钻噪声门槛（Base UV > 50、默认非美） | 否 | ✅ `scripts/analyzer.py` |
 
 ---
 
