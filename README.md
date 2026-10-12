@@ -80,11 +80,12 @@ git pull
 
 ## 📚 Skill 目录
 
-> 这一节随新增 skill 同步更新。当前为空 —— 等你点名。
+> 这一节随新增 skill 同步更新。
 
 | Skill | 用途 | 需要密钥 | 含脚本 |
 |:---|:---|:---:|:---:|
-| _（暂无）_ | | | |
+| [`pdf-iap-funnel-analysis`](./skills/pdf-iap-funnel-analysis/SKILL.md) | PDF IAP 订阅产品的日常全链路漏斗分析 SOP：吃进 CSV / Excel / 截图数据，按「启动品宣 → 商业化订阅 → 系统权限 → 端内功能留存」四阶段建标准漏斗，输出归因结论与异常预警。默认给全量总汇总（高信息密度，可直接发飞书 / 钉钉 / 微信）；明确点名「用户分组 / AB 测试」时才下钻组间横向对比 | 否 | ✅ `scripts/funnel_analyzer.py` |
+| [`browser-delegation`](./skills/browser-delegation/SKILL.md) | 让 AI 直接操作你**正在用的那个真实 Chrome**：走扩展桥接，100% 复用现有登录态与多账号 Cookie，不用重新登录、不用重启浏览器。在专属紫色标签组里代操作，用完自动销毁标签页、撤销调试白条。换机器后需手动加载一次 `extension/` | 否 | ✅ `scripts/`（`client.py` SDK + `server.py` 桥接服务）<br>🧩 `extension/` Chrome 扩展源码 |
 
 ---
 

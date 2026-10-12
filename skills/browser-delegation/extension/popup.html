@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Agent 浏览器桥接</title>
+  <style>
+    body {
+      width: 280px;
+      margin: 0;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    .status-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .badge-on {
+      background: #dcfce7;
+      color: #15803d;
+    }
+    .badge-off {
+      background: #f1f5f9;
+      color: #64748b;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .dot-on { background: #22c55e; }
+    .dot-off { background: #94a3b8; }
+    .tip {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+    .btn {
+      width: 100%;
+      padding: 8px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .btn:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span style="font-size: 20px;">🤖</span>
+    <span class="title">AI 浏览器桥接</span>
+  </div>
+
+  <div class="status-card">
+    <div class="status-row">
+      <span>桥接服务状态</span>
+      <span id="status-badge" class="badge badge-off">
+        <span id="status-dot" class="dot dot-off"></span>
+        <span id="status-text">检测中...</span>
+      </span>
+    </div>
+  </div>
+
+  <p class="tip">
+    无需重启 Chrome！当 AI 执行数据采集任务时，会自动创建专属标签页，复用此窗口的登录态进行操作。
+  </p>
+
+  <button id="reconnect-btn" class="btn">立即检查连接</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -7,16 +7,37 @@
     "tags": ["分类标签"],
     "hasScripts": "是否含可执行脚本",
     "requires": ["依赖的外部命令或运行时，如 python / ffmpeg / bun"],
+    "pythonDependencies": ["可选的 Python 包依赖，需 pip 安装，如 aiohttp / websockets"],
     "env": ["需要用户配置的环境变量名，如 SEEDREAM_API_KEY"]
   },
   "version": 1,
   "owner": "laimoon666-super",
   "repo": "https://github.com/laimoon666-super/skill-vault",
-  "updatedAt": "2026-10-11",
+  "updatedAt": "2026-10-12",
   "defaultInstallTargets": {
     "claude": "~/.claude/skills",
     "codex": "~/.codex/skills",
     "dsh": "~/.dsh/skills"
   },
-  "skills": []
+  "skills": [
+    {
+      "name": "pdf-iap-funnel-analysis",
+      "path": "skills/pdf-iap-funnel-analysis",
+      "description": "PDF IAP 订阅模式的日常漏斗数据分析 SOP。当用户发送数据文档（CSV/Excel/截图/看板）或要求做漏斗分析、付费转化分析、试用转化复盘、AB 组对比时使用。默认输出全量用户总汇总漏斗（高信息密度排版，适合直接发飞书/钉钉/微信）；仅当用户明确点名「用户分组 / AB 测试 / 用户配置」时才下钻组间横向对比。",
+      "tags": ["数据分析", "漏斗分析", "IAP", "订阅", "PDF"],
+      "hasScripts": true,
+      "requires": ["python"],
+      "env": []
+    },
+    {
+      "name": "browser-delegation",
+      "path": "skills/browser-delegation",
+      "description": "通过 Chrome 扩展桥接（Extension Relay Bridge）驱动用户正在使用的真实 Chrome，复用现有登录态与多账号 Cookie。当用户要求 AI 代替其操作需要登录的网站（后台查看、报表导出、筛选填表、点击下载）时使用。必须在专属紫色标签组中代操作并在结束后自动销毁标签页；严禁强起 Chrome 远程调试端口。",
+      "tags": ["浏览器自动化", "登录态复用", "Chrome扩展", "CDP"],
+      "hasScripts": true,
+      "requires": ["python"],
+      "pythonDependencies": ["aiohttp", "websockets"],
+      "env": []
+    }
+  ]
 }
