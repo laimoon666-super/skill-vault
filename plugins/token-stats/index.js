@@ -16,7 +16,7 @@
 // extra reads are needed.
 
 export const name = '@local/dsh-token-stats'
-export const inject = []
+export const inject = ['sessionQuery', 'sessionPersistence', 'webServer']
 
 const API_PATH = '/api/token-stats/stats'
 const READ_CONCURRENCY = 4
@@ -263,66 +263,53 @@ function isTrustedRequest(req) {
  * @param ctx - host root context.
  */
 export function apply(ctx) {
-  const state = { core: null, providers: [] }
-
-  ctx.inject(['sessionQuery', 'sessionPersistence'], (scope) => {
-    state.core = createCore(scope, ctx.logger)
-    return () => {
-      state.core = null
-    }
-  })
+  const core = createCore(ctx, ctx.logger)
+  let providers = []
 
   // Optional provider display names for nicer model labels in the panel.
   ctx.inject(['llm'], (scope) => {
     try {
-      state.providers = scope.llm.listProviders().map((entry) => ({ id: entry.id, name: entry.name }))
+      providers = scope.llm.listProviders().map((entry) => ({ id: entry.id, name: entry.name }))
     } catch {
-      state.providers = []
+      providers = []
     }
     return () => {
-      state.providers = []
+      providers = []
     }
   })
 
-  ctx.inject(['webServer'], (scope) => {
-    scope.webServer.register({
-      name: 'token-stats',
-      kind: 'exact',
-      path: API_PATH,
-      handler: async (req, res) => {
-        const send = (status, body) => {
-          res.writeHead(status, {
-            'content-type': 'application/json; charset=utf-8',
-            'cache-control': 'no-store',
-          })
-          res.end(JSON.stringify(body))
-        }
-        if (req.method !== 'GET') {
-          send(405, { ok: false, error: 'method not allowed' })
-          return
-        }
-        if (!isTrustedRequest(req)) {
-          send(403, { ok: false, error: 'forbidden: loopback only' })
-          return
-        }
-        const core = state.core
-        if (core === null) {
-          send(503, { ok: false, error: 'session query services not ready' })
-          return
-        }
-        try {
-          const url = new URL(req.url, 'http://localhost')
-          const force = url.searchParams.get('force') === '1'
-          const doc = await core.scan(force)
-          send(200, {
-            ok: true,
-            providers: state.providers,
-            ...doc,
-          })
-        } catch (error) {
-          send(500, { ok: false, error: String(error?.message ?? error) })
-        }
-      },
-    })
+  return ctx.webServer.register({
+    name: 'token-stats',
+    kind: 'exact',
+    path: API_PATH,
+    handler: async (req, res) => {
+      const send = (status, body) => {
+        res.writeHead(status, {
+          'content-type': 'application/json; charset=utf-8',
+          'cache-control': 'no-store',
+        })
+        res.end(JSON.stringify(body))
+      }
+      if (req.method !== 'GET') {
+        send(405, { ok: false, error: 'method not allowed' })
+        return
+      }
+      if (!isTrustedRequest(req)) {
+        send(403, { ok: false, error: 'forbidden: loopback only' })
+        return
+      }
+      try {
+        const url = new URL(req.url, 'http://localhost')
+        const force = url.searchParams.get('force') === '1'
+        const doc = await core.scan(force)
+        send(200, {
+          ok: true,
+          providers,
+          ...doc,
+        })
+      } catch (error) {
+        send(500, { ok: false, error: String(error?.message ?? error) })
+      }
+    },
   })
 }
