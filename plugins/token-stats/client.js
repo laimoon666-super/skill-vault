@@ -841,30 +841,34 @@ window.__ModuleLoader__.load({
         var disposers = []
         try {
           disposers.push(
-            scope.slots.register(
-              {
-                name: 'sidebar.panellist',
-                id: PANEL_ID,
-                order: 11,
-                label: NS,
-                locale: NS,
-              },
-              StatsIcon
-            )
+            scope.slots.inject('sidebar.panellist', function () {
+              return scope.slots.register(
+                {
+                  name: 'sidebar.panellist',
+                  id: PANEL_ID,
+                  order: 11,
+                  label: NS,
+                  locale: NS,
+                },
+                StatsIcon
+              )
+            })
           )
         } catch (error) {
           console.error('[token-stats] sidebar entry failed: ' + error)
         }
         try {
           disposers.push(
-            scope.slots.register(
-              {
-                name: 'main',
-                key: PANEL_ID,
-                locale: NS,
-              },
-              StatsPage
-            )
+            scope.slots.inject('main', function () {
+              return scope.slots.register(
+                {
+                  name: 'main',
+                  key: PANEL_ID,
+                  locale: NS,
+                },
+                StatsPage
+              )
+            })
           )
         } catch (error) {
           console.error('[token-stats] main panel failed: ' + error)
